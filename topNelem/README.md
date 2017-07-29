@@ -1,4 +1,5 @@
 # Top N numbers from a file (larger than main memory limit)
+For the sake of demostration, the memory limit is set to 6 bytes. It should be noted that a realistic limit will be much much higher than this. (For me it is 16\*1024\*1024\*1024).
 
 ## Pseudocode
 Let the maximum number of integers in a line be **_m_**.
@@ -33,3 +34,11 @@ make
 make run
 cat output_file   # The result is written to "output_file"
 ```
+
+## Todo
+Some points worth noting:
+* The program reads characters instead of integers, and currently works
+  for the range [0, 9].
+* We currently relax the contraints a bit and assume that the main memory
+  can hold the N values (where N is provided by the user).
+* The program cannot handle duplicates.
