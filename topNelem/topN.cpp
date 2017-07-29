@@ -6,9 +6,9 @@
 
 // We define a restricted constraint on the main memory
 // limit. For the sake of demonstration, it is set to
-// hold 3 char values at a time, although a realistic
+// hold 4 char values at a time, although a realistic
 // limit will be much much higher than this.
-#define MEM_LIMIT 6
+#define MEM_LIMIT 8
 #define INPUT_FILE  "input_file"   // input file
 #define OUTPUT_FILE "output_file"  // output file
 

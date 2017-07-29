@@ -1,5 +1,5 @@
 # Top N numbers from a file (larger than main memory limit)
-For the sake of demostration, the memory limit is set to 6 bytes. It should be noted that a realistic limit will be much much higher than this. (For me it is 16\*1024\*1024\*1024).
+For the sake of demonstration, the memory limit is set to 8 bytes. It should be noted that a realistic limit will be much much higher than this. (For me it is 16\*1024\*1024\*1024).
 
 ## Pseudocode
 Let the maximum number of integers in a line be **_m_**.
