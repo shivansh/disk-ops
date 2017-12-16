@@ -37,8 +37,5 @@ cat output_file   # The result is written to "output_file"
 
 ## Todo
 Some points worth noting:
-* The program reads characters instead of integers, and currently works
-  for the range [0, 9].
 * We currently relax the contraints a bit and assume that the main memory
   can hold the N values (where N is provided by the user).
-* The program cannot handle duplicates.
