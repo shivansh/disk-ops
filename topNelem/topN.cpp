@@ -17,31 +17,29 @@ void
 topN(int N)
 {
     int element;  // Individual element read from disk.
-    int limit;    // Maximum number of elements allowed in heap.
     int memory_limit = MEMORY / sizeof(element);
-    vector<int> buffer;  // Buffer for holding elements read from disk.
+    // Maximum number of elements allowed in heap.
+    int limit = min(N, memory_limit);
+    bool heap_modified = false;  // Tracks whether 'min_heap' was modified.
+    vector<int> buffer;          // Buffer for holding elements read from disk.
     priority_queue<int, vector<int>, greater<int>> min_heap;
     // Maximum number of elements that can be held in memory at a time.
     ifstream infile(INPUT_FILE);
 
+    // Initialize 'min_heap'.
+    while (limit--)
+        min_heap.push(0);
+
     while (infile >> element) {
         buffer.push_back(element);
         if (buffer.size() == memory_limit) {
-            limit = min(N, memory_limit);
-            if (min_heap.size() < limit) {
-                while (limit--) {
+            heap_modified = true;
+            while (!buffer.empty()) {
+                if (min_heap.top() < buffer.back()) {
+                    min_heap.pop();  // Remove the smallest element.
                     min_heap.push(buffer.back());
-                    buffer.pop_back();
                 }
-            } else {
-                // Buffer and heap are full.
-                while (!buffer.empty()) {
-                    if (min_heap.top() < buffer.back()) {
-                        min_heap.pop();
-                        min_heap.push(buffer.back());
-                    }
-                    buffer.pop_back();
-                }
+                buffer.pop_back();
             }
         }
     }
@@ -49,7 +47,7 @@ topN(int N)
 
     // Buffer might still be partially filled.
     if (!buffer.empty()) {
-        if (min_heap.empty()) {
+        if (!heap_modified) {
             // All the elements from disk are now loaded in memory,
             // hence it's safe to perform in-memory operations on them.
             sort(buffer.begin(), buffer.end(), greater<int>());
@@ -71,7 +69,7 @@ topN(int N)
 
     // Print the elements to stdout.
     while (!min_heap.empty()) {
-        cout << min_heap.top() << " ";
+        cout << min_heap.top() << ' ';
         min_heap.pop();
     }
     cout << endl;
